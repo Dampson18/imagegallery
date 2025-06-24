@@ -1,320 +1,887 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Image Gallery</title>
-<style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Kelvin Dampson">
+    <meta name="description" content="A professional and attractive image gallery showcasing various captivating visuals.">
+    <meta name="keywords" content="image gallery, photography, portfolio, art, professional images, visual content">
+    <title>Stunning Visuals | Kelvin Dampson Gallery</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Raleway:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+      /* Basic Reset & Global Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
-font-family: Arial, sans-serif;
-padding: 20px;
-background: #f0f0f0;
-color: #333;
-transition: background 0.5s;
-}
-h1 {
-text-align: center;
-margin-bottom: 20px;
-color: #444;
-animation: fadeIn 1s;
-}
-nav {
-text-align: center;
-margin-bottom: 20px;
-}
-nav a {
-margin: 0 15px;
-text-decoration: none;
-color: #007BFF;
-font-weight: bold;
-transition: color 0.3s;
-}
-nav a:hover {
-color: #0056b3;
-}
-.filter-buttons {
-text-align: center;
-margin-bottom: 20px;
-}
-.filter-buttons button {
-margin: 0 5px;
-padding: 10px;
-border: none;
-background: #007BFF;
-color: white;
-cursor: pointer;
-border-radius: 5px;
-transition: background 0.3s;
-}
-.filter-buttons button:hover {
-background: #0056b3;
-}
-.gallery {
-display: flex;
-flex-wrap: wrap;
-justify-content: center;
-gap: 15px;
-margin: 20px 0;
-}
-.gallery img {
-width: 200px;
-height: 200px;
-object-fit: cover;
-cursor: pointer;
-border-radius: 8px;
-transition: transform 0.2s, box-shadow 0.2s;
-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-.gallery img:hover {
-transform: scale(1.05);
-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-}
-.lightbox {
-display: none;
-position: fixed;
-top: 0;
-left: 0;
-right: 0;
-bottom: 0;
-background: rgba(0, 0, 0, 0.8);
-justify-content: center;
-align-items: center;
-z-index: 1000;
-animation: fadeIn 0.5s;
-}
-.lightbox img {
-max-width: 90%;
-max-height: 90%;
-border-radius: 8px;
-}
-.close {
-position: absolute;
-top: 20px;
-right: 30px;
-color: #fff;
-font-size: 24px;
-cursor: pointer;
-}
-.caption {
-position: absolute;
-bottom: 20px;
-left: 50%;
-transform: translateX(-50%);
-color: #fff;
-font-size: 18px;
-text-align: center;
-padding: 10px;
-background: rgba(0, 0, 0, 0.7);
-border-radius: 5px;
-}
-.nav-button {
-position: absolute;
-top: 50%;
-transform: translateY(-50%);
-font-size: 30px;
-color: #fff;
-cursor: pointer;
-background: none;
-border: none;
-}
-.prev {
-left: 20px;
-}
-.next {
-right: 20px;
-}
-.section {
-margin: 60px 0;
-text-align: center;
-}
-.upload-section {
-text-align: center;
-margin: 20px 0;
-padding: 20px;
-background: #fff;
-border-radius: 8px;
-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-.upload-section input[type="file"] {
-margin: 10px 0;
-display: block;
-margin: 10px auto;
-}
-.error-message {
-color: red;
-margin-top: 10px;
-}
-@keyframes fadeIn {
-from { opacity: 0; }
-to { opacity: 1; }
-}
-@media (max-width: 600px) {
-.gallery img {
-width: 150px;
-height: 150px;
-}
-}
-
-.section#about {
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    margin-top: 40px;
-    color: #333;
-}
-
-.section#about h2 {
-    color: #007BFF;
-}
-
-.section#about p {
-    font-size: 16px;
+    font-family: 'Raleway', sans-serif;
     line-height: 1.6;
+    color: #333;
+    background-color: #f8f8f8; /* Light grey background */
+    scroll-behavior: smooth;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    color: #2c3e50; /* Darker blue-grey for headings */
+    margin-bottom: 15px;
+}
+
+a {
+    text-decoration: none;
+    color: #4a90e2; /* Accent blue for links */
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #2d609e; /* Darker blue on hover */
+}
+
+ul {
+    list-style: none;
+}
+
+section {
+    padding: 80px 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header & Navigation */
+header {
+    background-color: #2c3e50; /* Dark blue-grey */
+    color: #ffffff;
+    padding: 20px 5%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+}
+
+.site-title {
+    font-size: 2.2em;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin: 0;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.site-title .fas {
+    color: #f39c12; /* Golden accent for icon */
+}
+
+nav ul {
+    display: flex;
+    gap: 30px;
+}
+
+nav a {
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 1.1em;
+    padding: 5px 0;
+    position: relative;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: #f39c12; /* Golden underline */
+    left: 0;
+    bottom: -5px;
+    transition: width 0.3s ease-out;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/hero-bg.jpg') no-repeat center center/cover; /* Replace with a suitable background image */
+    color: #ffffff;
+    text-align: center;
+    padding: 120px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 500px;
+}
+
+.hero-text h2 {
+    font-size: 3.5em;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-text p {
+    font-size: 1.4em;
+    max-width: 800px;
+    margin: 0 auto 40px auto;
+    opacity: 0.9;
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: #f39c12; /* Golden button */
+    color: #2c3e50;
+    padding: 15px 35px;
+    border-radius: 50px;
+    font-size: 1.1em;
+    font-weight: 700;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.cta-button:hover {
+    background-color: #e67e22; /* Darker golden on hover */
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Gallery Section */
+.gallery-section h2 {
+    text-align: center;
+    font-size: 3em;
+    margin-bottom: 50px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.gallery-section h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: #f39c12; /* Golden underline */
+    border-radius: 2px;
+}
+
+.filter-buttons {
+    text-align: center;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.filter-btn {
+    background-color: #ecf0f1; /* Light grey */
+    color: #333;
+    border: 1px solid #bdc3c7;
+    padding: 10px 25px;
+    border-radius: 30px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+    background-color: #dcdfe1;
+}
+
+.filter-btn.active {
+    background-color: #4a90e2; /* Accent blue when active */
+    color: #fff;
+    border-color: #4a90e2;
+}
+
+/* Image Grid */
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px; /* Increased gap for better spacing */
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.gallery-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 250px; /* Fixed height for consistent grid */
+    object-fit: cover; /* Ensures images cover the area without distortion */
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(44, 62, 80, 0.7); /* Dark blue-grey overlay */
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .overlay {
+    opacity: 1;
+}
+
+.overlay .title {
+    font-size: 1.5em;
+    font-weight: 700;
+    margin-bottom: 5px;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transition-delay: 0.1s;
+}
+
+.overlay .category {
+    font-size: 0.9em;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transition-delay: 0.2s;
+}
+
+.gallery-item:hover .overlay .title,
+.gallery-item:hover .overlay .category {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* About Section */
+.about-section {
+    background-color: #ecf0f1; /* Light grey background */
+    text-align: center;
+}
+
+.about-section h2 {
+    font-size: 3em;
+    margin-bottom: 50px;
+    position: relative;
+    padding-bottom: 10px;
+}
+.about-section h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: #f39c12;
+    border-radius: 2px;
+}
+
+.about-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.about-image {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%; /* Circular image */
+    object-fit: cover;
+    border: 5px solid #fff;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.about-content p {
+    max-width: 800px;
+    text-align: left;
+    font-size: 1.1em;
+    line-height: 1.8;
+}
+
+/* Contact Section */
+.contact-section {
+    background-color: #fff;
+    text-align: center;
+}
+.contact-section h2 {
+    font-size: 3em;
+    margin-bottom: 30px;
+    position: relative;
+    padding-bottom: 10px;
+}
+.contact-section h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: #f39c12;
+    border-radius: 2px;
+}
+
+.contact-intro {
+    font-size: 1.2em;
+    margin-bottom: 40px;
     color: #555;
 }
 
-</style>
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #444;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    font-family: 'Raleway', sans-serif;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+}
+
+textarea {
+    resize: vertical;
+}
+
+.send-message-btn {
+    width: auto;
+    display: flex; /* For icon alignment */
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Footer */
+footer {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    padding: 30px 5%;
+    text-align: center;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.footer-content p {
+    margin: 0;
+    font-size: 0.95em;
+}
+
+.social-links {
+    display: flex;
+    gap: 20px;
+}
+
+.social-links a {
+    color: #ecf0f1;
+    font-size: 1.5em;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #f39c12; /* Golden on hover */
+}
+
+/* Modal (Lightbox) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 2000; /* Sit on top */
+    padding-top: 60px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+    animation: fadeInModal 0.3s;
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 800px;
+    height: auto; /* Maintain aspect ratio */
+    max-height: 90vh; /* Limit height for tall images */
+    object-fit: contain; /* Ensures entire image is visible */
+    border-radius: 8px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+    animation: zoomIn 0.4s;
+}
+
+#caption {
+    margin: 20px auto;
+    display: block;
+    width: 80%;
+    max-width: 800px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    font-size: 1.1em;
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 5px;
+}
+
+.close-button {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Animations */
+@keyframes fadeInModal {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* Responsive Design */
+@media (max-width: 800px) {
+    .site-title {
+        font-size: 1.8em;
+    }
+    nav ul {
+        gap: 20px;
+    }
+    .hero-text h2 {
+        font-size: 2.5em;
+    }
+    .hero-text p {
+        font-size: 1.2em;
+    }
+    .gallery-section h2, .about-section h2, .contact-section h2 {
+        font-size: 2.5em;
+    }
+    .image-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+    .modal-content {
+        width: 90%;
+    }
+}
+
+@media (max-width: 600px) {
+    header {
+        padding: 15px 5%;
+    }
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+    nav a {
+        padding: 8px 0;
+        display: block;
+    }
+    nav a::after { /* Remove underline for stacked nav links */
+        width: 0 !important;
+    }
+    .hero-section {
+        padding: 80px 5%;
+        min-height: 400px;
+    }
+    .hero-text h2 {
+        font-size: 2em;
+    }
+    .hero-text p {
+        font-size: 1em;
+    }
+    .cta-button {
+        padding: 12px 25px;
+        font-size: 1em;
+    }
+    .gallery-section h2, .about-section h2, .contact-section h2 {
+        font-size: 2em;
+        margin-bottom: 30px;
+    }
+    .filter-buttons {
+        gap: 10px;
+        justify-content: center;
+    }
+    .filter-btn {
+        padding: 8px 18px;
+        font-size: 0.9em;
+    }
+    .image-grid {
+        grid-template-columns: 1fr; /* Single column on very small screens */
+        gap: 15px;
+    }
+    .about-content {
+        gap: 20px;
+    }
+    .about-content p {
+        font-size: 1em;
+    }
+    .contact-form {
+        padding: 30px;
+    }
+    .form-group label {
+        font-size: 0.95em;
+    }
+    .form-group input, .form-group textarea {
+        padding: 10px 12px;
+        font-size: 0.9em;
+    }
+    footer {
+        padding: 20px 5%;
+    }
+    .social-links {
+        gap: 15px;
+    }
+    .social-links a {
+        font-size: 1.3em;
+    }
+    #caption {
+        font-size: 1em;
+        padding: 8px 0;
+    }
+}
+    </style>
 </head>
 <body>
-<h1>Image Gallery</h1>
-<nav>
-<a href="#gallery">Gallery</a>
-<a href="#about">About</a>
-</nav>
+    <header>
+        <div class="header-content">
+            <h1 class="site-title"><i class="fas fa-camera"></i> Kelvin Dampson Gallery</h1>
+            <nav>
+                <ul>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-<div class="upload-section">
-<h2>Upload Image</h2>
-<input type="file" id="imageUpload" accept="image/*">
-<button onclick="uploadImage()">Upload</button>
-<div class="error-message" id="error-message"></div>
-</div>
+    <main>
+        <section id="hero" class="hero-section">
+            <div class="hero-text">
+                <h2>Capturing Moments, Creating Art</h2>
+                <p>Explore a curated collection of breathtaking visuals, meticulously crafted to inspire.</p>
+                <a href="#gallery" class="cta-button">View Gallery</a>
+            </div>
+        </section>
 
-<div class="gallery" id="gallery"></div>
+        <section id="gallery" class="gallery-section">
+            <h2>Our Collection</h2>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="nature">Nature</button>
+                <button class="filter-btn" data-filter="portraits">Portraits</button>
+                <button class="filter-btn" data-filter="architecture">Architecture</button>
+            </div>
 
-<div class="lightbox" id="lightbox" onclick="closeLightbox()">
-<span class="close" onclick="closeLightbox()">&times;</span>
-<img id="lightbox-img" src="">
-<div class="caption" id="lightbox-caption"></div>
-<button class="nav-button prev" onclick="changeImage(-1)">&#10094;</button>
-<button class="nav-button next" onclick="changeImage(1)">&#10095;</button>
-<a id="downloadLink" style="display: none;" download>Download</a>
-</div>
+            <div class="image-grid">
+                <div class="gallery-item" data-category="nature">
+                    <img src="images/image1.jpg" alt="Vibrant Autumn Forest">
+                    <div class="overlay">
+                        <span class="title">Autumn Forest</span>
+                        <span class="category">Nature</span>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="architecture">
+                    <img src="images/image2.jpg" alt="Modern Skyscraper at Dusk">
+                    <div class="overlay">
+                        <span class="title">City Glow</span>
+                        <span class="category">Architecture</span>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="portraits">
+                    <img src="images/image3.jpg" alt="Thoughtful Person in Sunlight">
+                    <div class="overlay">
+                        <span class="title">Pensive Glance</span>
+                        <span class="category">Portraits</span>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="nature">
+                    <img src="images/image4.jpg" alt="Misty Mountain Range">
+                    <div class="overlay">
+                        <span class="title">Misty Peaks</span>
+                        <span class="category">Nature</span>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="architecture">
+                    <img src="images/image5.jpg" alt="Abstract Building Facade">
+                    <div class="overlay">
+                        <span class="title">Urban Patterns</span>
+                        <span class="category">Architecture</span>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="portraits">
+                    <img src="images/image6.jpg" alt="Smiling Child with Freckles">
+                    <div class="overlay">
+                        <span class="title">Innocence</span>
+                        <span class="category">Portraits</span>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="nature">
+                    <img src="images/image7.jpg" alt="Desert Landscape at Sunset">
+                    <div class="overlay">
+                        <span class="title">Desert Sunset</span>
+                        <span class="category">Nature</span>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="architecture">
+                    <img src="images/image8.jpg" alt="Historical Archway">
+                    <div class="overlay">
+                        <span class="title">Ancient Gate</span>
+                        <span class="category">Architecture</span>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="nature">
+                    <img src="images/image9.jpg" alt="Tropical Beach with Palm Trees">
+                    <div class="overlay">
+                        <span class="title">Paradise Shore</span>
+                        <span class="category">Nature</span>
+                    </div>
+                </div>
+                </div>
+        </section>
 
-<div class="section" id="about">
-<h2>About Us</h2>
-<p>Welcome to our image gallery! Here, you can explore a wide variety of images, ranging from nature and animals to architecture and abstract designs. Each image is carefully selected to bring you the best of visual content. Browse, download, or even delete your favorite images!</p>
-</div>
+        <section id="about" class="about-section">
+            <h2>About Kelvin Dampson Photography</h2>
+            <div class="about-content">
+                <img src="images/about-me.jpg" alt="Kelvin Dampson Profile" class="about-image">
+                <p>Welcome to my visual world! I'm Kelvin Dampson, a passionate photographer dedicated to capturing the beauty, emotion, and stories that unfold around us. With a keen eye for detail and a love for creative expression, I strive to produce images that not only resonate visually but also tell a compelling narrative.</p>
+                <p>My journey in photography began a decade ago with a simple point-and-shoot camera], evolving into a profound commitment to mastering the art of light, composition, and storytelling. This gallery represents a curated selection of my work, reflecting my diverse interests from the serene landscapes of Ghana to the vibrant energy of its people and architecture.</p>
+                <p>I believe photography is more than just taking pictures; it's about freezing moments in time, evoking feelings, and sharing unique perspectives. Thank you for visiting, and I hope my work inspires you as much as creating it inspires me.</p>
+            </div>
+        </section>
 
-<script>
-let images = [
-  { src: "https://via.placeholder.com/200/0000FF", caption: "Image 1" },
-  { src: "https://via.placeholder.com/200/FF0000", caption: "Image 2" },
-  { src: "https://via.placeholder.com/200/00FF00", caption: "Image 3" },
-  { src: "https://via.placeholder.com/200/FFFF00", caption: "Image 4" },
-  { src: "https://via.placeholder.com/200/FF00FF", caption: "Image 5" },
-  { src: "https://via.placeholder.com/200/123456", caption: "Image 6" },
-  { src: "https://via.placeholder.com/200/654321", caption: "Image 7" },
-  { src: "https://via.placeholder.com/200/ABCDEF", caption: "Image 8" },
-  { src: "https://via.placeholder.com/200/FEDCBA", caption: "Image 9" },
-  { src: "https://via.placeholder.com/200/222222", caption: "Image 10" },
-  { src: "https://via.placeholder.com/200/333333", caption: "Image 11" },
-  { src: "https://via.placeholder.com/200/444444", caption: "Image 12" },
-  { src: "https://via.placeholder.com/200/666666", caption: "Image 13" },
-  { src: "https://via.placeholder.com/200/777777", caption: "Image 14" },
-  { src: "https://via.placeholder.com/200/888888", caption: "Image 15" },
-  { src: "https://via.placeholder.com/200/999999", caption: "Image 16" }
-];
+        <section id="contact" class="contact-section">
+            <h2>Get in Touch</h2>
+            <p class="contact-intro">Have a project in mind, a question about my work, or just want to say hello? I'd love to hear from you!</p>
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject:</label>
+                    <input type="text" id="subject" name="subject" placeholder="Project Inquiry, Collaboration, etc." required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" rows="6" placeholder="Tell me about your project or inquiry..." required></textarea>
+                </div>
+                <button type="submit" class="cta-button send-message-btn"><i class="fas fa-paper-plane"></i> Send Message</button>
+            </form>
+        </section>
+    </main>
 
-function loadImages() {
-  const gallery = document.getElementById('gallery');
-  gallery.innerHTML = '';
-  images.forEach((image, index) => {
-    const imgElement = document.createElement('img');
-    imgElement.src = image.src;
-    imgElement.alt = image.caption;
-    imgElement.onclick = () => openLightbox(index);
-    
-    const deleteButton = document.createElement('button');
-    deleteButton.textContent = 'Delete';
-    deleteButton.onclick = (e) => {
-      e.stopPropagation();
-      deleteImage(index);
-    };
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 Kelvin Dampson. All rights reserved.</p>
+            <div class="social-links">
+                <a href="https://facebook.com/yourprofile" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://instagram.com/yourprofile" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://twitter.com/yourprofile" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://linkedin.com/in/yourprofile" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </footer>
 
-    const imgWrapper = document.createElement('div');
-    imgWrapper.appendChild(imgElement);
-    imgWrapper.appendChild(deleteButton);
-    gallery.appendChild(imgWrapper);
-  });
-}
+    <div id="imageModal" class="modal">
+        <span class="close-button">&times;</span>
+        <img class="modal-content" id="img01">
+        <div id="caption"></div>
+    </div>
 
-function openLightbox(index) {
-  const lightbox = document.getElementById("lightbox");
-  const lightboxImg = document.getElementById("lightbox-img");
-  const caption = document.getElementById("lightbox-caption");
-  const downloadLink = document.getElementById("downloadLink");
+    <script src="script.js">
+      document.addEventListener('DOMContentLoaded', () => {
+    // --- Image Modal (Lightbox) Functionality ---
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('img01');
+    const captionText = document.getElementById('caption');
+    const closeButton = document.querySelector('.close-button');
+    const galleryItems = document.querySelectorAll('.gallery-item');
 
-  lightboxImg.src = images[index].src;
-  caption.textContent = images[index].caption;
-  downloadLink.href = images[index].src;
-  downloadLink.style.display = 'block';
-  lightbox.style.display = 'flex';
-}
+    galleryItems.forEach(item => {
+        item.addEventListener('click', () => {
+            modal.style.display = 'block';
+            modalImg.src = item.querySelector('img').src;
+            captionText.innerHTML = item.querySelector('.overlay .title').textContent + ' <span style="font-size:0.8em; opacity:0.8;">(' + item.querySelector('.overlay .category').textContent + ')</span>';
+        });
+    });
 
-function closeLightbox() {
-  const lightbox = document.getElementById("lightbox");
-  lightbox.style.display = 'none';
-}
+    closeButton.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
 
-function changeImage(direction) {
-  currentImageIndex += direction;
-  if (currentImageIndex < 0) {
-    currentImageIndex = images.length - 1;
-  } else if (currentImageIndex >= images.length) {
-    currentImageIndex = 0;
-  }
-  openLightbox(currentImageIndex);
-}
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
 
-function uploadImage() {
-  const fileInput = document.getElementById("imageUpload");
-  const errorMessage = document.getElementById("error-message");
+    // Close modal with Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.style.display === 'block') {
+            modal.style.display = 'none';
+        }
+    });
 
-  if (fileInput.files.length === 0) {
-    errorMessage.textContent = "Please select an image to upload.";
-    return;
-  }
+    // --- Image Filtering Functionality ---
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const imageGrid = document.querySelector('.image-grid');
 
-  const file = fileInput.files[0];
-  const reader = new FileReader();
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Remove 'active' class from all buttons
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            // Add 'active' class to the clicked button
+            button.classList.add('active');
 
-  reader.onload = function(e) {
-    const newImage = {
-      src: e.target.result,
-      caption: file.name
-    };
+            const filterValue = button.dataset.filter; // e.g., 'all', 'nature'
 
-    // Add the new image to the gallery
-    images.push(newImage);
-    loadImages(); // Refresh the gallery with all images
-    errorMessage.textContent = ""; // Clear any previous error messages
-  };
+            galleryItems.forEach(item => {
+                const itemCategory = item.dataset.category;
 
-  reader.onerror = function() {
-    errorMessage.textContent = "Error uploading image.";
-  };
+                if (filterValue === 'all' || itemCategory === filterValue) {
+                    item.style.display = 'block'; // Show item
+                    item.style.animation = 'fadeIn 0.5s ease-out'; // Re-apply fade-in
+                    item.style.opacity = '1';
+                } else {
+                    item.style.display = 'none'; // Hide item
+                }
+            });
+        });
+    });
 
-  reader.readAsDataURL(file);
-}
+    // Optional: Add a simple fadeIn animation for grid items when page loads
+    // This will be handled by CSS if you set opacity 0 and add transition
+    // A more robust solution for individual item fade-in on filter:
+    const fadeInKeyframes = `
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    `;
+    const styleSheet = document.createElement("style");
+    styleSheet.type = "text/css";
+    styleSheet.innerText = fadeInKeyframes;
+    document.head.appendChild(styleSheet);
 
-function deleteImage(index) {
-  images.splice(index, 1);
-  loadImages(); // Refresh the gallery after deletion
-}
 
-loadImages(); // Initial load of images
-</script>
+    // --- Contact Form Submission (Placeholder) ---
+    const contactForm = document.querySelector('.contact-form');
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault(); // Prevent actual form submission
 
+        // In a real application, you'd send this data to a server (e.g., via fetch API)
+        // For demonstration, we'll just show an alert.
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const subject = document.getElementById('subject').value;
+        const message = document.getElementById('message').value;
+
+        if (name && email && subject && message) {
+            alert(`Thank you, ${name}! Your message has been sent. We'll get back to you shortly.`);
+            console.log('Form Submitted:', { name, email, subject, message });
+            contactForm.reset(); // Clear the form
+        } else {
+            alert('Please fill in all fields.');
+        }
+    });
+});
+    </script>
 </body>
 </html>
